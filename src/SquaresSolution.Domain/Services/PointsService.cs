@@ -1,9 +1,10 @@
 ﻿using SquaresSolution.Domain.Entities;
+using SquaresSolution.Domain.Exceptions;
+using SquaresSolution.Domain.Helpers;
 using SquaresSolution.Domain.Interfaces;
+using SquaresSolution.Domain.Validators;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SquaresSolution.Domain.Services
@@ -20,6 +21,22 @@ namespace SquaresSolution.Domain.Services
         public async Task<IEnumerable<PointEntity>> GetAll()
         {
             return await _repository.GetAll();
+        }
+
+        public async Task AddPoint(PointEntity point)
+        {
+            var validator = new CoordinateValidator();
+
+            var validationResult = await validator.ValidateAsync(point);
+
+            if (!validationResult.IsValid)
+            {
+                throw new CustomValidationException(
+                    ValidationHelpers.GenerateErrorMessage(validationResult.Errors)
+                    );
+            }
+
+            await _repository.AddPoint(point);
         }
     }
 }

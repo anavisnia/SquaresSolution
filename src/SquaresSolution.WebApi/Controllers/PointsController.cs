@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SquaresSolution.Domain.Entities;
+using SquaresSolution.Domain.Exceptions;
 using SquaresSolution.Domain.Services;
-using SquaresSolution.Infrostructure;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,6 +26,26 @@ namespace SquaresSolution.WebApi.Controllers
             var points = await _service.GetAll();
 
             return Ok(points);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddPoint(PointEntity point)
+        {
+            try
+            {
+                await _service.AddPoint(point);
+            }
+            catch (DbUpdateException)
+            {
+
+                return BadRequest("The point already exists");
+            }
+            catch (CustomValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return NoContent();
         }
     }
 }

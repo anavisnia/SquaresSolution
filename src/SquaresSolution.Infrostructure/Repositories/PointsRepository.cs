@@ -3,8 +3,6 @@ using SquaresSolution.Domain.Entities;
 using SquaresSolution.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SquaresSolution.Infrostructure.Repositories
@@ -18,11 +16,19 @@ namespace SquaresSolution.Infrostructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+
         public async Task<IEnumerable<PointEntity>> GetAll()
         {
             var points = await _context.Points.ToListAsync();
 
             return points;
+        }
+
+        public async Task AddPoint(PointEntity point)
+        {
+            _context.Add(point);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -7,5 +7,6 @@ namespace SquaresSolution.Domain.Interfaces
     public interface IPointsRepository
     {
         Task<IEnumerable<PointEntity>> GetAll();
+        Task AddPoint(PointEntity point);
     }
 }
