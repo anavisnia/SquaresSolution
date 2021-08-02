@@ -22,17 +22,17 @@ export class PointService {
     return this.http.get<Point[]>(this.apiUrl);
   }
 
-  addPoint(point: Point): Observable<Point> {
-    return this.http.post<Point>(this.apiUrl, point, httpOptions);
-  }
+  // addPoint(point: Point): Observable<Point> {
+  //   return this.http.post<Point>(this.apiUrl, point, httpOptions);
+  // }
 
   // deletepoint(point: Point): Observable<Point> {
   //   const url = `${this.apiUrl}/${point.id}`;
   //   return this.http.delete<Point>(url, httpOptions);
   // }
 
-  updatePoint(point: Point): Observable<Point> {
-    return this.http.post<Point>(this.apiUrl, point, httpOptions);
-  }
+  // updatePoint(point: Point): Observable<Point> {
+  //   return this.http.post<Point>(this.apiUrl, point, httpOptions);
+  // }
 
 }
