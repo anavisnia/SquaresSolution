@@ -2,8 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SquaresSolution.Domain.Entities;
 using SquaresSolution.Domain.Exceptions;
-using SquaresSolution.Domain.Services;
-using System;
+using SquaresSolution.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,17 +12,18 @@ namespace SquaresSolution.WebApi.Controllers
     [Route("[controller]")]
     public class PointsController : ControllerBase
     {
-        private readonly PointsService _service;
+        private readonly IPointsRepository _repository;
+        //private readonly PointsService _service;
 
-        public PointsController(PointsService service)
+        public PointsController(IPointsRepository repository)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PointEntity>>> GetAll()
         {
-            var points = await _service.GetAll();
+            var points = await _repository.GetAll();
 
             return Ok(points);
         }
@@ -33,7 +33,7 @@ namespace SquaresSolution.WebApi.Controllers
         {
             try
             {
-                await _service.AddPoint(point);
+                await _repository.AddPoint(point);
             }
             catch (DbUpdateException)
             {

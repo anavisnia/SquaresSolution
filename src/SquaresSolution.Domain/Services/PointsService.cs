@@ -23,7 +23,7 @@ namespace SquaresSolution.Domain.Services
             return await _repository.GetAll();
         }
 
-        public async Task AddPoint(PointEntity point)
+        public async Task AddPointAsync(PointEntity point)
         {
             var validator = new CoordinateValidator();
 

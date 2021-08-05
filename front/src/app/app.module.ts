@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { PointersviewComponent } from './components/pointersview/pointersview.component';
 import { AddPointerComponent } from './components/add-pointer/add-pointer.component';
 import { PointItemComponent } from './components/point-item/point-item.component';
+import { PointUploadComponent } from './components/point-upload/point-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PointersviewComponent,
     AddPointerComponent,
-    PointItemComponent
+    PointItemComponent,
+    PointUploadComponent
   ],
   imports: [
     BrowserModule,
