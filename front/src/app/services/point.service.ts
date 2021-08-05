@@ -23,15 +23,13 @@ export class PointService {
     return this.http.get<Point[]>(this.apiUrl);
   }
 
-  uploadFile(files) {
-    if (files.length === 0)
+  uploadFile(file) {
+    if (file.length === 0)
       return;
   
     const formData = new FormData();
   
-    for (const file of files) {
-      formData.append(file.name, file);
-    }
+    formData.append('file', file);
   
     const uploadReq = new HttpRequest('POST', this.fileUrl, formData, {
       reportProgress: true,

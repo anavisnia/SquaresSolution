@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="picture">Choose a file</label>
     <div class="custom-file">
-      <input #file type="file" id="customFile" accept=".txt" multiple (change)="upload(file.files)" />
+      <input #file type="file" id="customFile" accept=".txt" (change)="upload(file)" />
       <label class="custom-file-label" for="customFile">Choose file</label>
     </div>
 </div>
